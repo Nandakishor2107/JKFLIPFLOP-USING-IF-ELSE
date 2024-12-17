@@ -10,6 +10,11 @@ Quartus prime
 
 **THEORY**
 
+The JK Flip-Flop is a sequential circuit that eliminates the ambiguity present in an SR flip-flop when both inputs are high (S = R = 1). It has two inputs, J and K, along with a clock signal.
+
+Inputs: J (Set), K (Reset), Clock (CLK)
+Output: Q (Present State), Q' (Complement)
+
 **JK Flip-Flop**
 
 JK flip-flop is the modified version of SR flip-flop. It operates with only positive clock transitions or negative clock transitions. The circuit diagram of JK flip-flop is shown in the following figure.
@@ -34,15 +39,72 @@ The maximum possible groupings of adjacent ones are already shown in the figure.
 
 **Procedure**
 
-/* write all the steps invloved */
+Step1: Define the specifications and initialize the design.
+Step2: Declare the name of the entity and architecture by using VHDL source code.
+Step3: Write the source code in VERILOG.
+Step4: Check the syntax and debug the errors if found, obtain the synthesis report.
+Step5: Verify the output by simulating the source code.
+Step6: Write all possible combinations of input using the test bench.
+Step7: Obtain the place and route report.
 
 **PROGRAM**
 
-/* Program for flipflops and verify its truth table in quartus using Verilog programming. Developed by: RegisterNumber:
+/* Program for flipflops and verify its truth table in quartus using Verilog programming.
+
+```
+module jkff(j, k, clk, rst, q, qbar);
+  input j;
+  input k;
+  input clk;
+  input rst;
+  output q;
+  output qbar;
+         reg q;
+         reg qbar;
+         always @ (posedge(clk) or posedge(rst)) begin
+         if (rst==1'b1)
+         begin
+         q=1'b0;
+         qbar=1'b1;
+         end
+         else if (j==1'b0 && k==1'b0)
+         begin
+         q=q;
+         qbar=qbar;
+         end
+         else if (j==1'b0 && k==1'b1)
+         begin
+         q=1'b0;
+         qbar=1'b1;
+         end
+         else if (j==1'b1 && k==1'b0)
+         begin
+         q=1'b1;
+         qbar=1'b0;
+         end
+         else
+         begin
+         q=~q;
+         qbar=~qbar;
+         end
+         end
+         endmodule
+```
+
+Developed by: NANDA KISHOR SP
+RegisterNumber: 24011485
 */
 
 **RTL LOGIC FOR FLIPFLOPS**
 
+![Screenshot (102)](https://github.com/user-attachments/assets/8f0c9f00-9d89-44e6-971e-00d594281c49)
+
+
 **TIMING DIGRAMS FOR FLIP FLOPS**
 
+![Screenshot (103)](https://github.com/user-attachments/assets/a8f7812b-8081-4510-adec-77f79837895c)
+
+
 **RESULTS**
+
+The JK flip-flop was implemented successfully using Verilog, and its functionality was validated through simulation. The output matches the expected functional table of the JK flip-flop.
